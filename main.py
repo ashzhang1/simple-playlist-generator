@@ -12,22 +12,6 @@ class saveSongs:
         self.new_playlist_id = ""
         self.trackList = ""
 
-    def find_songs(self):
-        query = "https://api.spotify.com/v1/playlists/{}/tracks".format(hipHopPlaylist_id)
-
-        response = requests.get(query,
-                                headers={"Content-Type": "application/json",
-                                         "Authorization": "Bearer {}".format(self.spotify_token)})
-
-        response_json = response.json()
-
-        for i in response_json["items"]:
-            self.tracks += (i["track"]["uri"] + ",")
-        self.tracks = self.tracks[:-1]
-
-        print(self.tracks)
-        self.add_to_playlist()
-
     def create_playlist(self):
         todaysDate = date.today().strftime("%d/%m/%Y")
         query = "https://api.spotify.com/v1/users/{}/playlists".format(spotify_user_id)
